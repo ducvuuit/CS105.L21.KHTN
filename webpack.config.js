@@ -49,6 +49,6 @@ module.exports = {
         },
     },
     plugins: [
-        new HtmlWebpackPlugin({ title: pkg.title, favicon: 'src/favicon.ico' }),
+        new HtmlWebpackPlugin({ title: pkg.title, favicon: 'src/icons8-tetris-game-console-64.png' }),
     ],
 };

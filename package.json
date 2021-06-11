@@ -1,9 +1,9 @@
 {
-  "name": "3d-tetris-deluxe",
-  "repository": "3DTetrisDeluxe",
+  "name": "3d-tetris",
+  "repository": "3DTetris",
   "version": "0.1.0",
-  "title": "3D Tetris Deluxe",
-  "description": "3D Tetris game with cool visuals and power-ups",
+  "title": "3D Tetris",
+  "description": "game xep hinh 3D",
   "keywords": [
     "Princeton",
     "graphics",
