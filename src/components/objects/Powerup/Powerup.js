@@ -1,5 +1,5 @@
 import { Group, MeshBasicMaterial, CircleBufferGeometry, Mesh, DoubleSide, TextureLoader} from 'three';
-import TEXTURE_FLASH from './flash.jpg';
+import TEXTURE_FLASH from './flash.png';
 import TEXTURE_SNAIL from './snail.png';
 import TEXTURE_BOMB from './bomb.png';
 import TEXTURE_SHUFF from './shuffle.jpg';

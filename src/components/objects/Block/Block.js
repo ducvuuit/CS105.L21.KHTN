@@ -1,9 +1,12 @@
-import { Group, Mesh, BoxBufferGeometry, SphereBufferGeometry, MeshPhongMaterial, MeshBasicMaterial } from 'three';
+import { Group, Mesh, BoxBufferGeometry, TorusKnotBufferGeometry,ConeBufferGeometry, CircleBufferGeometry, SphereBufferGeometry, MeshPhongMaterial, MeshBasicMaterial } from 'three';
 import { EdgesGeometry, LineBasicMaterial, LineDashedMaterial, LineSegments, TextureLoader } from 'three';
 import { Powerup } from 'objects';
 import TEXTURE_BRICK from './brick.jpg';
+import TEXTURE_BRICK2 from './brick2.jpg';
 import TEXTURE_MARBLE from './marble.jpg';
-
+import TEXTURE_VIETNAM from './vietnam.jpg';
+import TEXTURE_GOLD from './gold.jpg';
+import TEXTURE_UIT from './uit.png';
 
 class Block extends Group {
     constructor(parent) {
@@ -145,6 +148,13 @@ class Block extends Group {
             case 'Sphere':
                 geometry = new SphereBufferGeometry(0.5);
                 break;
+            case 'Cone':
+                geometry = new ConeBufferGeometry(1,1);
+                break;
+            case 'Torus':
+                geometry = new TorusKnotBufferGeometry();
+                break;
+
         }
 
         let material;
@@ -160,14 +170,30 @@ class Block extends Group {
                 material = new MeshBasicMaterial({map: texture, transparent: true});
                 shadowMaterial = new LineDashedMaterial({color: 0x633e3c, linewidth: 4});
                 break;
+            case 'Brick2':
+                texture = new TextureLoader().load(TEXTURE_BRICK2);
+                material = new MeshBasicMaterial({map: texture, transparent: true});
+                shadowMaterial = new LineDashedMaterial({color: 0x633e3c, linewidth: 4});
+                break;
             case 'Marble':
                 texture = new TextureLoader().load(TEXTURE_MARBLE);
                 material = new MeshBasicMaterial({map: texture, transparent: true});
                 shadowMaterial = new LineDashedMaterial({color: 0x6e6b69, linewidth: 4});
                 break;
-            case 'Neon':
-                material = new MeshPhongMaterial({color: color, transparent: true});
-                shadowMaterial = new LineDashedMaterial({color: material.color, linewidth: 4});
+            case 'Gold':
+                texture = new TextureLoader().load(TEXTURE_GOLD);
+                material = new MeshBasicMaterial({map: texture, transparent: true});
+                shadowMaterial = new LineDashedMaterial({color: 0x6e6b69, linewidth: 4});
+                break;
+            case 'Viet':
+                texture = new TextureLoader().load(TEXTURE_VIETNAM);
+                material = new MeshBasicMaterial({map: texture, transparent: true});
+                shadowMaterial = new LineDashedMaterial({color: 0x633e3c, linewidth: 4});
+                break;
+            case 'UIT':
+                texture = new TextureLoader().load(TEXTURE_UIT);
+                material = new MeshBasicMaterial({map: texture, transparent: true});
+                shadowMaterial = new LineDashedMaterial({color: 0x633e3c, linewidth: 4});
                 break;
         }
 

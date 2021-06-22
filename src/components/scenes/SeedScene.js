@@ -51,8 +51,8 @@ class SeedScene extends Scene {
 
             this.state.gui.add(this.state, 'Multiplayer');
             this.state.gui.add(this.state, 'Powerups');
-            this.state.gui.add(this.state, 'Shape', ['Cube', 'Sphere']);
-            this.state.gui.add(this.state, 'Colors', ['Standard', 'Brick', 'Marble', 'Neon']);
+            this.state.gui.add(this.state, 'Shape', ['Cube', 'Sphere', 'Cone', 'Text']);
+            this.state.gui.add(this.state, 'Colors', ['Standard', 'UIT', 'Brick', 'Brick2', 'Marble', 'Gold', 'Viet']);
             this.state.gui.add(this.state, 'Start');
         }
     }
