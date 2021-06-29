@@ -9,7 +9,7 @@ class Floor extends Group {
 
         // Make floor
         const geometry = new PlaneBufferGeometry(12, 4).rotateX(-0.5*Math.PI);
-        const material = new MeshBasicMaterial({color: 0x555555});
+        const material = new MeshBasicMaterial({color: 0x03632b});
         const mesh = new Mesh(geometry, material);
 
         geometry.dispose();

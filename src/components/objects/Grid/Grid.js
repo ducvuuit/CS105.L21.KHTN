@@ -37,7 +37,7 @@ class Grid extends Group {
         }
 
         const lineGeometry = new BufferGeometry().setFromPoints(points);
-        const lineMaterial = new LineDashedMaterial({color: 0xFFF8BBD0});
+        const lineMaterial = new LineDashedMaterial({color: 0x000000});
         const lines = new LineSegments(lineGeometry, lineMaterial);
 
         // add to mesh

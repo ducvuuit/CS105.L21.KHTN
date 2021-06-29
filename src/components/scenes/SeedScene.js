@@ -1,7 +1,13 @@
 import { Scene, Color, TextGeometry, MeshPhongMaterial, Mesh, Font } from 'three';
+import { EdgesGeometry, LineBasicMaterial, LineDashedMaterial, LineSegments, TextureLoader } from 'three';
+import { MeshBasicMaterial } from 'three';
 import { Block, Floor, Grid } from 'objects';
 import { BasicLights } from 'lights';
 import { TWEEN } from 'three/examples/jsm/libs/tween.module.min.js';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
+import TEXTURE_HOIAN from './hoian.jpg';
+import TEXTURE_UIT from './uit.jpg';
+import TEXTURE_DEMON from './DemonSlayer.jpg';
 
 class SeedScene extends Scene {
     constructor(gui, addGui) {
@@ -14,7 +20,7 @@ class SeedScene extends Scene {
             gui: gui,
             Start: this.startGame.bind(this),
             Multiplayer: false,
-            Powerups: false,
+            Powerups: true,
             Shape: 'Cube',
             Colors: 'Standard',
             // multiplayer related state
@@ -36,11 +42,18 @@ class SeedScene extends Scene {
             rowPoints: [40, 100, 300, 1200],
         };
 
+        const loader = new GLTFLoader();
+
+        loader.load( './nezuko/scene.gltf', function ( gltf ) {
+
+	        this.add( gltf );
+	        });
+
         // Add meshes to scene
         const floor = new Floor();
         const grid = new Grid();
         const lights = new BasicLights();
-        this.add(floor, grid, lights);
+        this.add(floor, grid, lights,loader);
 
         // create text stuff
         this.updateScoreKeeper();
@@ -52,13 +65,21 @@ class SeedScene extends Scene {
             this.state.gui.add(this.state, 'Multiplayer');
             this.state.gui.add(this.state, 'Powerups');
             this.state.gui.add(this.state, 'Shape', ['Cube', 'Sphere', 'Cone', 'Text']);
-            this.state.gui.add(this.state, 'Colors', ['Standard', 'UIT', 'Brick', 'Brick2', 'Marble', 'Gold', 'Viet']);
+            this.state.gui.add(this.state, 'Colors', ['Standard', 'UIT', 'Brick', 'Tanjiro', 'Brick2', 'Marble', 'Gold', 'Viet']);
             this.state.gui.add(this.state, 'Start');
         }
+
     }
 
     // start a new game
     startGame() {
+
+                const loader = new GLTFLoader();
+
+        loader.load( './nezuko/scene.gltf', function ( gltf ) {
+
+	        this.add( gltf.scene );
+	        });
         this.state.started = true; 
         this.state.gameOver = false; 
         this.state.score = 0;
@@ -112,7 +133,7 @@ class SeedScene extends Scene {
             height: 0.25,
             curveSegments: 10,
         });
-        const nextMaterial = new MeshPhongMaterial({color: 0x8a2be2});
+        const nextMaterial = new MeshPhongMaterial({color: 0x608c56});
         const nextMesh = new Mesh(nextGeometry, nextMaterial);
         nextMesh.rotateY(Math.PI);
         nextMesh.position.x = 11;
@@ -128,7 +149,7 @@ class SeedScene extends Scene {
             height: 0.25,
             curveSegments: 10,
         });
-        const holdMaterial = new MeshPhongMaterial({color: 0xffff33});
+        const holdMaterial = new MeshPhongMaterial({color: 0xf2d561});
         const holdMesh = new Mesh(holdGeometry, holdMaterial);
         holdMesh.rotateY(Math.PI);
         holdMesh.position.x = 11.5;
@@ -503,11 +524,25 @@ class SeedScene extends Scene {
     update(timeStamp) {
         const { updateList } = this.state;
 
+
         if (this.state.Colors == "Neon") {
             this.background = undefined;
         }
+        else if (this.state.Colors == "Viet")
+        {
+        this.background = new TextureLoader().load(TEXTURE_HOIAN);
+        }
+        else if (this.state.Colors == "Tanjiro")
+        {
+        this.background = new TextureLoader().load(TEXTURE_DEMON);
+        }
+        else if (this.state.Colors == "UIT")
+        {
+        this.background = new TextureLoader().load(TEXTURE_UIT);
+        }
         else {
-            this.background = new Color(0x7ec0ee);
+            this.background = new Color(0x000000);
+
         }
         // Call update for each object in the updateList
         for (const obj of updateList) {
@@ -525,7 +560,7 @@ class SeedScene extends Scene {
 
     // update visible score
     updateScoreKeeper() {
-        const fontJson = require('three/examples/fonts/optimer_bold.typeface.json');
+        const fontJson = require('three/examples/fonts/gentilis_regular.typeface.json');
         const font = new Font(fontJson);
 
         const text = String('High Score: ' + this.state.highScore + '\nScore    : ' + this.state.score + '\nLevel: ' + this.state.level);
@@ -537,7 +572,7 @@ class SeedScene extends Scene {
             bevelEnabled: false,
         });
 
-        const material = new MeshPhongMaterial({color: 0x1106a1});
+        const material = new MeshPhongMaterial({color: 0x1babb3});
         const mesh = new Mesh(geometry, material);
         mesh.rotateY(Math.PI);
         mesh.position.x = -7;

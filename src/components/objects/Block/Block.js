@@ -7,6 +7,7 @@ import TEXTURE_MARBLE from './marble.jpg';
 import TEXTURE_VIETNAM from './vietnam.jpg';
 import TEXTURE_GOLD from './gold.jpg';
 import TEXTURE_UIT from './uit.png';
+import TEXTURE_TANJIRO from './tanjiro.jpg';
 
 class Block extends Group {
     constructor(parent) {
@@ -192,6 +193,11 @@ class Block extends Group {
                 break;
             case 'UIT':
                 texture = new TextureLoader().load(TEXTURE_UIT);
+                material = new MeshBasicMaterial({map: texture, transparent: true});
+                shadowMaterial = new LineDashedMaterial({color: 0x633e3c, linewidth: 4});
+                break;
+            case 'Tanjiro':
+                texture = new TextureLoader().load(TEXTURE_TANJIRO);
                 material = new MeshBasicMaterial({map: texture, transparent: true});
                 shadowMaterial = new LineDashedMaterial({color: 0x633e3c, linewidth: 4});
                 break;
